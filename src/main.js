@@ -2,49 +2,32 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import WeatherService from './services/weather-service.js';
-import GiphyService from './services/giphy-service';
+import NewsService from './services/news-service'; // the class then the file 
 
-function clearFields() {
-  $('#location').val("");
-  $('.show-errors').text("");
-  $('.show-gif').text("");
+function clearFields() { //clear all inpur fields
+  $('#show-story').text("");
 }
 
-function displayWeatherDescription(description) {
-  $('.weather-description').text(`The weather is ${description}!`);
+function getElements(response) { //4
+  if (response.status === "OK") { //if correct to the API response exists
+    response.results.forEach(result => {
+      $('#show-story').append(`<li><a href="${result.url}">${result.title}</a></li>`); //show response name
+      $('#show-story').append(`<a href="${result.url}"><img src="${result.multimedia[2].url}"></a>`);
+    });
+    // $("#imageBox").html(`<img src="${response.url}">`);
+  } else {
+    $('.showErrors').text(`There was an error: ${response.status}`); //show response error message.
+  }
 }
 
-function displayGif(response) {
-  const url = response.data[0].images.downsized.url
-  $('.show-gif').html(`<img src='${url}'>`);
-}
 
-function displayErrors(error) {
-  $('.show-errors').text(`${error}`);
-}
-
-$(document).ready(function() {
-  $('#weatherLocation').click(function() {
-    let city = $('#location').val();
-    clearFields();
-    WeatherService.getWeather(city)
-      .then(function(weatherResponse) {
-        if (weatherResponse instanceof Error) {
-          throw Error(`OpenWeather API error: ${weatherResponse.message}`);
-        }
-        const weatherDescription = weatherResponse.weather[0].description;
-        displayWeatherDescription(weatherDescription);
-        return GiphyService.getGif(weatherDescription);
-      })
-      .then(function(giphyResponse) {
-        if (giphyResponse instanceof Error) {
-          throw Error(`Giphy API error: ${giphyResponse.message}`);
-        }
-        displayGif(giphyResponse);
-      })
-      .catch(function(error) {
-        displayErrors(error.message)
+$(document).ready(function() { //1
+  $('#getStories').click(function() {
+    const selectedSections = $("#sections option:selected").val(); //take in user value
+    clearFields(); //run clear fields
+    NewsService.getNews(selectedSections) //call recipe class and getrecipe method pass userSearch  
+      .then(function(response) { //take response and pass to getElements
+        getElements(response); //call getElements with response  //3
       });
   });
 });

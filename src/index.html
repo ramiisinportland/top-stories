@@ -1,16 +1,47 @@
 <html lang="en-US">
 <head>
-  <title>Weather</title>
+  <title>Top Stories
+</title>
 </head>
 <body>
   <div class="container">
-    <h1>Get Weather Conditions From Anywhere!</h1>
-    <label for="location">Enter a location:</label>
-    <input id="location" type="text">
-    <button class="btn-success" id="weatherLocation">Get the weather</button>
-    <div class="weather-description"></div>
-    <div class="show-gif"></div>
-    <div class="show-errors"></div>
+    <form id="selection">
+      <h1 class="text-capitalize">Chose your area of interest</h1>
+      <label for="location">What you like to know about:</label>
+      <select name="sections" id="sections">
+        <option value="0" selected>--Please Choose a Section--</option>
+        <option value="arts">Arts!</option>
+        <option value="automobiles">Automobiles</option>
+        <option value="books">Books</option>
+        <option value="business">Business</option>
+        <option value="fashion">Fashion</option>
+        <option value="food">Food</option>
+        <option value="health">Health</option>
+        <option value="home">Home</option>
+        <option value="insider">Insider</option>
+        <option value="magazine">Magazine</option>
+        <option value="movies">Movies</option>
+        <option value="nyregion">Nyregion</option>
+        <option value="obituaries">Obituaries</option>
+        <option value="opinion">Opinion</option>
+        <option value="politics">Politics</option>
+        <option value="realestate">Realestate</option>
+        <option value="science">Science</option>
+        <option value="sports">Sports</option>
+        <option value="sundayreview">Sundayreview</option>
+        <option value="technology">Technology</option>
+        <option value="theater">Theater</option>
+        <option value="t-magazine">T-magazine</option>
+        <option value="travel">Travel</option>
+        <option value="upshot">Upshot</option>
+        <option value="us">Us</option>
+        <option value="world">World</option>
+      </select>
+    </form>
+  
+    <button class="btn-dark text-uppercase" id="getStories">Get Stories</button>
+    <div id="show-story"></div>
+    <div id="show-errors"></div>
   </div>
 </body>
 </html>

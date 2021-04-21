@@ -1,3 +1,9 @@
 body {
-  background-color: lightblue;
+  background-color: #fff;
+}
+
+button {
+  display: block;
+  width: 50%;
+  border-radius: 3px;
 }
